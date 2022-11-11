@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Music Players</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" 
+    integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" 
+    crossorigin="anonymous"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="main_div">
+      <div class="music_container">
+          <h2 id="title">LOTUS LANE</h2>
+          <h3 id="artist">The Loyalist</h3>
+          <div class="img_container">
+              <img src="images/music3.jpg" alt="">
+              
+          </div>
+          <audio src="music/94_-_Saanson_Ko_-_Arijit_Singh.mp3" controls></audio>
+          <!--controls-->
+          <div class="music_controls">
+            <i class="fas fa-backward" id="prev" title="previous"></i>
+            <i class="fas fa-play  main_button" id="play" title="play"></i>
+            <i class="fas fa-forward" id="next" title="next"></i>
+          </div>
+      </div>
+</div>
+<script>
+    const music = document.querySelector("audio");
+    const img =document.querySelector("img")
+    const play =document.getElementById("play");
+    const artist =document.getElementById("artist");
+    const title =document.getElementById("title");
+    const prev=document.getElementById("prev");
+    const next =document.getElementById("next");
+
+    const songs = [
+{
+    name: "naina",
+    title:"Lotus Lane",
+    artist:"arijit singh",
+
+},
+{
+    name: "music",
+    title:"Lotus Lane",
+    artist:"arijit singh",
+
+},
+{
+    name: "music3",
+    title:"Hamdard",
+    artist:"The Loyalist",
+
+},
+{
+    name: "music2",
+    title:"saanso ko",
+    artist:"Arijit Singh",
+
+},
+{
+    name: "music1",
+    title:"Agar tum saat ho",
+    artist:"The Loyalist",
+
+},
+{
+    name: "akh lad jaave",
+    title:"music1.jpg",
+    artist:"Arijit Singh",
+
+},
+];
+
+    let isPlaying = false;
+
+    // for play funtion
+    const playMusic = () =>{
+        isPlaying = true;
+        music.play();
+        play.classList.replace("fa-play","fa-pause");
+        img.classList.add("anime");
+    };
+       // for pause funtion
+        const pauseMusic = () => {
+        isPlaying = false;
+        music.pause();
+      
+        play.classList.replace("fa-pause", "fa-play");
+        img.classList.remove("anime");
+    };
+
+    play.addEventListener("click", () => {
+    isPlaying ? pauseMusic(): playMusic();
+        
+    });
+    const loadSong = (songs) => {
+    title.textContent = songs.title;
+    artist.textContent = songs.artist;
+    music.src ="music/"+songs.name+" .mp3";
+    img.src ="images/" +songs.name +".jpg";
+    };
+    songIndex = 1;
+   // loadSong(songs[3]);
+
+    const nextSong = () => {
+    songIndex = (songIndex - 1 + songs.length) %songs.length;
+    loadSong(songs[songIndex]);
+    playMusic();
+    };
+
+    next.addEventListener("click", nextSong);
+    next.addEventListener("click", prevSong);
+</script>
+</body>
+</html>
